@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="myDiv">Test</div>
+    <button id="myButton">Clickme</button>
+
+    <ul id="myUl">
+
+    </ul>
+
+
+<script>
+    window.addEventListener('load', function () {
+        let myDiv = document.querySelector("#myDiv");
+        let myButton = document.querySelector("#myButton");
+        myButton.addEventListener('click', () => {
+            myDiv.classList.toggle("hidden");
+        });
+
+        let cars = ["bmw", "lexus", "ferrari"];
+        let myUl = document.querySelector("#myUl");
+        for(let car of cars) {
+            let li = document.createElement('li');
+            li.innerHTML = car;
+            myUl.append(li);
+        }
+
+    });
+</script>
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+</body>
+</html>

@@ -1,40 +1,60 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
+  <div v-if="isShowMyDiv">Test</div>
+  <button @click="switchIsShow">Click</button>
+
+  <div>
     <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
+      <li v-for="car in cars">{{ car }}</li>
     </ul>
   </div>
+
+
+  <div>
+    <h1>Новости</h1>
+    <div v-for="newsItem in newsList">
+      <h2>{{newsItem.title}}</h2>
+      <p>{{newsItem.description}}</p>
+      <a href="{{newsItem.url}}">Click</a>
+    </div>
+  </div>
+
+  <div>
+    <input v-model="inputTextTitle" type="text">
+    <input v-model="inputTextDescription" type="text">
+    <input v-model="inputTextUrl" type="text">
+  </div>
+  <button @click="createNewItem">Create new news</button>
+
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  data() {
+    return {
+      message: "hello world",
+      isShowMyDiv: false,
+      cars: ["bmw", "lexus", "ferrari"],
+      newsList: [
+          {title: "Заголовок 1", description: "бла бла бла бла", url: "http://google.com"},
+          {title: "Заголовок 2", description: "бла2 бл2а бла бла", url: "http://google.com"},
+          {title: "Заголовок 3", description: "бла3 бла 3бла бла", url: "http://google.com"},
+      ],
+      inputTextTitle: "",
+      inputTextDescription: "",
+      inputTextUrl: "",
+    }
+  },
+  methods: {
+    switchIsShow () {
+      this.isShowMyDiv = !this.isShowMyDiv;
+    },
+    createNewItem () {
+      this.newsList.push({
+        title: this.inputTextTitle,
+        description: this.inputTextDescription,
+        url: this.inputTextUrl,
+      });
+    },
   }
 }
 </script>
@@ -47,10 +67,6 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
 a {
   color: #42b983;
